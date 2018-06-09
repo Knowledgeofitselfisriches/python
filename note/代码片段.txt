@@ -1,0 +1,139 @@
+1.数组个,十,百,...
+nt index=0;
+int n;
+int m;
+int[] arr = new int[m];
+while(n>0){
+  arr[index]=n%10;
+  index++;
+  n/=10;
+}
+2.位异或特点
+a^b^b=a  a^b^a=b
+交换a=1,b=2;
+(1)a=a^b b=a^b  a=a^b
+(2)b=(a+b)-(a=b);
+(3)a=a+b b=a-b a=a-b
+(3)int c =0; c=a a=b b=c
+3.阶乘递归
+public int multiply(int number) {	
+		if(number ==0)number=1;
+        else   number=number*multiply(number-1);
+        return number;}
+4.判断对称
+ public static  boolean  isSymmetry(String  str){
+        char[] ch = str.toCharArray();
+        for (int start = 0,end=ch.length-1;  start<=end; start++,end--) {
+            if(ch[start]!=ch[end]){
+                return  false;
+            }
+        }
+        return true;
+    }
+5.Arrays的toString原码
+ public static String toString(int[] a) {
+        if (a == null)
+            return "null";//数组不存在
+        int iMax = a.length - 1;
+        if (iMax == -1)
+            return "[]";//数组元素不存在
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; ; i++) {
+            b.append(a[i]);
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
+        }
+    }
+6.start-end之间的整数
+int num = (int)round(start+(random()*(end-start+1)));
+7.Comparable接口的comparaTo()方法由元素实现模版  (有限制 元素类改变可能影响comparaTo方法)
+  int num = this.age-s.age
+  int num2 = num == 0 ?this.name.equals(s.name):num;
+  return num2;
+8.TreeSet<T> t  = new TreeSet<T>(new ComparaTor<T>(){(使用更加常见)
+         @override
+		 public int compara(T s1 ,T s2){
+		     body
+		 }
+}); 
+9.map遍历1:
+Map<K,V> map =new TreeMap<K,V>();
+  Set<K>  set = map.keySet<K>();
+  for(K k;set){
+    V value = map.get(k);
+  }  
+     遍历2:
+	    所有键值对集合Entry实体键值对对象
+Set<Map.Entry<K,v>> set = map.entrySet();	 
+for(Map.Entry<K,v> entry;set){
+   K k = entry.getKey();
+   V v = entry.getValue();
+}
+10.输入片段
+File file = new File("a.txt");  
+
+FileInputStream fis = new FileInputStream(file);
+        byte[] b = new byte[1024];
+        int  len = 0;
+        while( (len=fis.read(b))!=-1){
+            System.out.print(new String(b,0,len));
+        }
+        fis.close();
+11.int转换char  int a = 97; char b = (char)(a+48) '0'=48	 
+12.BufferedReader 实现
+ private Reader r;
+ public BufferedReader(Reader r){this.r = r}
+ public String readLine()throws IOException{
+     StringBuilder sb = new StringBuilder();
+	 int ch = 0;
+	 while((ch=r.read())!=-1){
+	    if(ch=="\r"){continue;}
+		if(ch=="\n"){return sb.toString;}
+		else{
+		   sb.append((char)ch);
+		}
+		
+	 }
+	 //为了防止数据丢失
+	 if(sb.length>0){
+	    sb.toString();
+	 }
+	 return null;
+ }
+ public void close() throws IOException{
+   this.r.close;
+ }
+ 13.删除目录
+ File srcFloder = new File("目录");
+ public void deleteFolder(File srcFloder){
+   File[] fileArray = srcFloder.listFiles();
+	 if(fileArray!=null){
+	   for(File file:fileArray){
+		 if(!file.isFile){
+			deleteFolder(file);
+		 }else{
+		    file.delete();
+		 }
+	   }
+	   srcFloder.delete();
+	 }
+}
+.clearFloat::after{
+	content:".";
+ 	display:block;
+  	clear:both;
+	visibility:hidden;
+	height:0;
+  	
+	}
+.clearFloat{
+	zoom:1;
+}
+  *{
+ 	display:inline-block;
+	vertical-align:middle;
+
+	}
