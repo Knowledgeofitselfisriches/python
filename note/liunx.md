@@ -1,4 +1,14 @@
 #  操作系统 --> /boot的内核文件 --> init --> 运行级别
+   linux 特点
+    免费，开源，安全，高效，稳定，高并发
+   虚拟机网络链接
+    1. 桥接 与other 系统通信，容易冲突
+    2. NAT  网路地址转换
+    3. 主机 不能访问外网
+    设置共享文件夹 /mnt/hghn/
+
+   linux 一切皆是文件
+     
 
    Linux系统有7个运行级别(runlevel)：
 
@@ -40,7 +50,7 @@
 ## linux 的进化
     bcpl语言--b语言--c语言--unix--unix version-7 闭源 -->minix --> linux 、
     有关的词汇
-	GNU is not Unix
+	GNU is not Unix GNU计划 ： knerul \shell \application
 	GPL GNU通用公共许可证（GNU General Public License，GPL）
 	GCC GNU编译器套件（GNU Compiler Collection）c/c++/java/python/go
 	POSIX 规范
@@ -56,10 +66,19 @@
 	        Document Desktop Game	
 	/ 根目录        
 	/ etc 系统配置文件       
-	/ home 放置用户
+	/ home 放置用户主目录
+  / usr 用户应用和文件类似 program file
+  / root 超级权限主目录
+  / media linux 识别光驱，硬盘等挂载在此目录下
+  / mnt 用户零食挂载的文件系统的
 	/ bin 可执行文件 终端命令
 	/ boot 系统内核文件 系统引导文件
-	/ dev  系统设备文件 光驱等
+	/ dev  系统设备文件cpu disl gpu 光驱等
+  / opt 第三方软件安装目录
+  / usr/local 这是给另一个主机额外安装软件的安装目录
+  一般是编译源代码方式安装的程序
+  / var
+    存放经常变动的文件，如日志等
 	用户尽量不要操作自己文件夹外的文件
 ## 常用命令
 	查看目录
@@ -205,7 +224,10 @@
  	                  now    代表现在 
  	                  20：25 在20.25执行
  	                  +10    10min后执行 
-
+    halt 直接使用 等价于关机
+    reboot 重启
+    sync 将内存数据写入disk 防止丢失
+    logout 退出登录 只有在运行级别3：及多用户情况下               
     网络 install net-tools
    	ifconfig 查看 网卡配置信息 ifconfig | grep inet
    	ping ip 检测与目标地址的链接  
@@ -278,12 +300,17 @@
     3.  创建新用户/设置密码/删除用户
       useradd -m 自动建立用户家目录
               -g 指定用户所在组，否则建立同名的组
+              -d  directory username 指定目录建立用户家目录
+
         sudo useradd -m -g dev liuwentao         
       passwd username 设置用户名  
         sudo passwd liuwentao  
-      userdel -r username
+      userdel  username 保留家目录删除
+      userdel -r username 目录和家目录一起删除
 
       cat /etc/passwd | grep username
+      切换用户 su username
+      exit 返回原用户
 ### 查看用户信息
      id username 
     id 查看当前用户
@@ -407,6 +434,27 @@
   bzip2 负责压缩文件和解压缩 
    tar -jcvf name.tar.bz2 file/dir 
    tar -jxvf name.tar.bz2 [-C dir] 
+### vi/vim的三种模式
+   1. 正常模式
+      可以使用快捷键
+      命令行下 vim file 进入
+      也可按esc进入
+   2. 插入模式/编辑模式
+      按i 可输入内容
 
- 	   
+   3. 命令行模式
+      
+        ：wq保存并退出
+        ： q 退出
+        ：q！不保存强制退出 
+       可以提供特殊的命令
+ 	  yy 复制当前行 yy4 复制当前行4次
+    p 粘贴
+    ddN 删除几行  
+    ：set nu/nonu 设置行号/取消行号
+    G 文末 gg文首
+    u 取消
+    切换 行 输入行号 shift g 
+##     
 
+ 
