@@ -1,17 +1,17 @@
-·	#  操作系统 --> /boot的内核文件 --> init --> 运行级别
-   linux 特点
+#  操作系统 --> /boot的内核文件 --> init --> 运行级别
+    linux 特点
     免费，开源，安全，高效，稳定，高并发
-   虚拟机网络链接
+    虚拟机网络链接
     1. 桥接 与other 系统通信，容易冲突
     2. NAT  网路地址转换
     3. 主机 不能访问外网
     设置共享文件夹 /mnt/hghn/
 
-   linux 一切皆是文件
+     linux 一切皆是文件
      
 ## apt命令(ubuntu 16版本以上) 早期版本apt-get
-   apt ubuntu Advanced Packaging Tool下的安装包管理工具
-   sudo 获取root权限
+    apt ubuntu Advanced Packaging Tool下的安装包管理工具
+    sudo 获取root权限
 	1.安装软件
 	  sudo apt install softwarename
 	2.卸载软件
@@ -19,7 +19,7 @@
 	3.更新可用软件包列表
 	  sudo apt update
 	4.更新已安装的包
-  	  sudo apt upgrade   
+     sudo apt upgrade   
 ## deb 格式 （Debian Linux）
 	sudo dpkg -i <package.dep> 
 	cd dir  进入目录
@@ -57,15 +57,15 @@
 	/ 根目录        
 	/ etc 系统配置文件       
 	/ home 放置用户主目录
-  / usr 用户应用和文件类似 program file
-  / root 超级权限主目录
-  / media linux 识别光驱，硬盘等挂载在此目录下
-  / mnt 用户零食挂载的文件系统的
+    / usr 用户应用和文件类似 program file
+    / root 超级权限主目录
+    / media linux 识别光驱，硬盘等挂载在此目录下
+    / mnt 用户零食挂载的文件系统的
 	/ bin 可执行文件 终端命令
 	/ boot 系统内核文件 系统引导文件
 	/ dev  系统设备文件cpu disl gpu 光驱等
-  / opt 第三方软件安装目录
-  / usr/local 这是给另一个主机额外安装软件的安装目录
+    / opt 第三方软件安装目录
+    / usr/local 这是给另一个主机额外安装软件的安装目录
   一般是编译源代码方式安装的程序
   / var
     存放经常变动的文件，如日志等
@@ -229,29 +229,30 @@
        将一个命令的输出作为另一个命令的输入 通过| 连接 左 命令的输出 | 接收输入命令
        常用管道命令 more /grep
 ## 远程管理
+
     关机和重启
- 	  shutdown -options time   默认1min后关机
- 	         - r            重启
- 	         - c            取消操作
- 	                  now    代表现在 
- 	                  20：25 在20.25执行
- 	                  +10    10min后执行 
+	  shutdown -options time   默认1min后关机
+	         - r            重启
+	         - c            取消操作
+	                  now    代表现在 
+	                  20：25 在20.25执行
+	                  +10    10min后执行 
     halt 直接使用 等价于关机
     reboot 重启
     sync 将内存数据写入disk 防止丢失
     logout 退出登录 只有在运行级别3：及多用户情况下               
     网络 install net-tools
-   	ifconfig 查看 网卡配置信息 ifconfig | grep inet
-   	ping ip 检测与目标地址的链接  
+     	ifconfig 查看 网卡配置信息 ifconfig | grep inet
+     	ping ip 检测与目标地址的链接  
 ###远程管理工具 secure shell  (ssh) 
      --. 数据传输加密防止泄露
      --. 数据传输压缩提升速度
-   1.常见服务端口
+    1.常见服务端口
      ssh   22
      web   80
      https 443
      FTP   21 
-   2.基本格式 ssh [-p port] user@remote
+     2.基本格式 ssh [-p port] user@remote
     remote:ip/域名/别名	
     port SSH Server 监听的端口22
     exit 退出当前用户
@@ -259,11 +260,11 @@
     用cat /etc/ssh/sshd_config 命令查看是否安装了ssh服务端
     通过 ps -e | grep ssh 查看服务是否启用
         1309 ?        00:00:00 ssh-agent 客户端
-  		4010 ?        00:00:00 sshd 服务端
+	   	4010 ?        00:00:00 sshd 服务端
     登录 	ssh [-p port] user@remote
     按yes
     输入密码
-   3.远程拷贝文件 scp                                           
+     3.远程拷贝文件 scp                                           
      scp -p port 源文件 user@remote:相对user路径或绝对路径        
     windows作为客户端 cmd命令下 ubuntu文件位置 ： 代表user目录下  目标路径
     从服务器复制文件
@@ -272,7 +273,7 @@
     scp -p 22 miku.jpg caowenqi@192.168.157.130:Pictures/
        -r  发送/接收 文件夹
        -P（大写） + 端口号指定 SSH服务器端口号   
-   4.有关ssh配置信息都保存在用户家目录的.ssh下 win 存于 user下
+    4.有关ssh配置信息都保存在用户家目录的.ssh下 win 存于 user下
      known_hosts 保存有相应的文件信息
      免密登录
      配置公钥
@@ -440,29 +441,29 @@
     1 ZB = 1024EB
     1 YB = 1024ZB
 ### 打包/解包
-  win 使用 rar
-  mac 使用 zip
-  linux    tar.gz
-  tar 负责打包文件但不压缩
-   tar -cvf name.tar file/dir
-   tar -xvf name.tar 
-  gzip 负责压缩文件和解压缩
-   tar -zcvf name.tar.gz file/dir 
-   tar -zxvf name.tar.gz
-   解压到指定路径
-   tar -cvf name.tar -C 目标路径
-  bzip2 负责压缩文件和解压缩 
-   tar -jcvf name.tar.bz2 file/dir 
-   tar -jxvf name.tar.bz2 [-C dir] 
+    win 使用 rar
+    mac 使用 zip
+    linux    tar.gz
+    tar 负责打包文件但不压缩
+     tar -cvf name.tar file/dir
+     tar -xvf name.tar 
+    gzip 负责压缩文件和解压缩
+     tar -zcvf name.tar.gz file/dir 
+     tar -zxvf name.tar.gz
+     解压到指定路径
+     tar -cvf name.tar -C 目标路径
+    bzip2 负责压缩文件和解压缩 
+     tar -jcvf name.tar.bz2 file/dir 
+     tar -jxvf name.tar.bz2 [-C dir] 
 ### vi/vim的三种模式
-   1. 正常模式
-      可以使用快捷键
-      命令行下 vim file 进入
-      也可按esc进入
-   2. 插入模式/编辑模式
-      按i 可输入内容
+     1. 正常模式
+        可以使用快捷键
+        命令行下 vim file 进入
+        也可按esc进入
+     2. 插入模式/编辑模式
+        按i 可输入内容
 
-   3. 命令行模式
+     3. 命令行模式
       
         ：wq保存并退出
         ： q 退出
