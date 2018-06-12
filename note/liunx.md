@@ -548,7 +548,7 @@
     ps -a
        -u
        -x 
-    ![进程]()   
+    ![进程](python/image/linux_process.PNG)   
 
 
 
