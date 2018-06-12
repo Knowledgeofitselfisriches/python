@@ -525,3 +525,30 @@
     yum 安装指令  
 ### 服务 ls -lha /etc/init.d
     which service /usr/sbin/service
+### 网络配置
+    配置文件/etc/network/interfaces.d
+    auto ens33 外网网卡
+    iface ens33 inet static　　#设置静态IP，动态的是将static修改为dhcp，如果设置为动态IP无法设置虚拟网卡
+    address 172.16.2.95　　　　# 如果为动态IP以下的都不用配置。
+    netmask 255.255.0.0
+    gateway 172.16.254.254
+    auto ens33:1 虚拟网卡
+    iface ens33:1 inet static
+    address 192.168.8.95
+    netmask 255.255.255.0
+    gateway 192.168.8.1
+    配置默认网关
+    sudo vim /etc/resolv.conf
+    nameserver 172.16.254.254
+### 进程管理
+    每个进程有个id 都对应一个父进程
+    守护进程
+    用户进程
+    查看进程信息
+    ps -a
+       -u
+       -x 
+    ![进程]()   
+
+
+
