@@ -1,4 +1,4 @@
-#  操作系统 --> /boot的内核文件 --> init --> 运行级别
+·	#  操作系统 --> /boot的内核文件 --> init --> 运行级别
    linux 特点
     免费，开源，安全，高效，稳定，高并发
    虚拟机网络链接
@@ -9,16 +9,6 @@
 
    linux 一切皆是文件
      
-
-   Linux系统有7个运行级别(runlevel)：
-
-    * 运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动
-    * 运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登陆
-    * 运行级别2：多用户状态(没有NFS)
-    * 运行级别3：完全的多用户状态(有NFS)，登陆后进入控制台命令行模式
-    * 运行级别4：系统未使用，保留
-    * 运行级别5：X11控制台，登陆后进入图形GUI模式
-    * 运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动
 ## apt命令(ubuntu 16版本以上) 早期版本apt-get
    apt ubuntu Advanced Packaging Tool下的安装包管理工具
    sudo 获取root权限
@@ -89,6 +79,7 @@
 	创建删除 touch rm mkdir
 		touch[文件名] 如果不存在创建文件
 		mkdir[目录] make directory 如果不存在创建目录
+			  -p 	  	
 		rmdir[目录] remove directory 删除空目录
 		rm -r [目录] 删除目录及目录下所有内容
 		rm[文件名] remove file    删除文件
@@ -98,9 +89,30 @@
 	查看文件内容
 		cat
 		more
-		grep
+		find[range][options] 递归查找各个目录
+					- name  find ~ -name cal.txt
+					- user find /opt -user caowenqi
+					+nM -nM n find / +20M
+		locate 快速定位文件 利用locate数据库快速等位	
+		必须先sudo  updatedb 更新数据库	位于/var/lib/mlocate/mlocate.db	locate file
+		grep [option] content source
+			-n 显示匹配行及其行号
+			-i 忽略字母大小写
+			grep -n 1 /home/caowenqi/Desktop/cal.txt
+
+		less 分屏查看文件
 	其它
-		echo
+		echo 输出到console 
+			echo $PATH 输出环境变量
+		head file 查看文件前10行
+			-n    查看前n行 	
+		tail 显示尾部10行
+			-n 显示尾部n行
+			-f 实时追踪文件	
+		history 查看历史命令纪录
+		    	n 查看最近10条
+		执行历史命令 ！行号    		
+
 		重定向 > ,>>
 		管道 |		
 
@@ -284,6 +296,8 @@
      	Port    22  
               
 ## 用户 权限 组
+	# root 用户
+	$ 当前用户
     增加/减少权限 chmod +/- r/w/x 文件名/目录
     x 表示可访问权限
     1. root 超级用户
@@ -311,6 +325,10 @@
       cat /etc/passwd | grep username
       切换用户 su username
       exit 返回原用户
+### 配置文件信息
+	* 用户配置文件 /etc/passwd
+	* 组配置文件   /etc/group
+	* 口令配置文件(密码和登录信息(加密)) /etc/shadow       
 ### 查看用户信息
      id username 
     id 查看当前用户
@@ -381,7 +399,9 @@
       chmod a+x f01　　//对文件f01的u,g,o都设置可执行属性
 ## 查询系统信息
      时间和日期
-       date
+       date 
+       		date +'%Y-%m-%d %H:%M:%S'
+       		date -s '2018-10-10 23:20:10'
        cal -y 查看一年的日历
      磁盘和目录空间
        df -h 显示空闲空间 disk free
@@ -447,14 +467,61 @@
         ：wq保存并退出
         ： q 退出
         ：q！不保存强制退出 
-       可以提供特殊的命令
- 	  yy 复制当前行 yy4 复制当前行4次
-    p 粘贴
-    ddN 删除几行  
-    ：set nu/nonu 设置行号/取消行号
-    G 文末 gg文首
-    u 取消
-    切换 行 输入行号 shift g 
-##     
+        可以提供特殊的命令yy 复制当前行 yy4 复制当前行4次
+	    p 粘贴
+	    ddN 删除几行  
+	    set nu/nonu 设置行号/取消行号
+	    G 文末 gg文首
+	    u 取消
+	    切换 行 输入行号 shift g 
+## Linux系统有7个运行级别(runlevel)：
+     特殊运行级别配置文件/etc/inittab 
+     临时切换 telinit/init N
+     长期切换 建立/etc/inittab  写入id:3:initdefault:  不可改为4，6
+    * 运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动
+    * 运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登陆
+    * 运行级别2：多用户状态(没有NFS)
+    * 运行级别3：完全的多用户状态(有NFS)，登陆后进入控制台命令行模式
+    * 运行级别4：系统未使用，保留
+    * 运行级别5：X11控制台，登陆后进入图形GUI模式
+    * 运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动   
+    面试题 ： 密码找回
+    	单用户模式，无需输入密码
+### 定时任务
 
- 
+	 crontab [option]   
+	 		- e 编辑定时任务
+	 		- i 查询任务
+	 		- r 删除当前用户的所有定时任务 	
+>>>  任务调度      
+     更换cron 的默认编辑器select-editor
+     创建/home/caowenqi/Desktop/test/task.sh
+     chmod 744 /home/caowenqi/Desktop/test/task.sh
+      
+     crontab -e task.sh */1 * * * * /tmp/mydate.txt
+     crontab -r 终止所有任务
+
+     crontab -l 列出调度任务
+### 分区  disk --- file system
+          硬盘的每个分区都挂载到某个目录下
+
+          scsi 硬盘 sda2 表示a第一块硬盘 第二分区 
+          lsblk -f 查看分区
+    mount 挂载
+    umount卸载   
+
+>>> 挂载一个硬盘 
+    查询整体的磁盘情况 df -lh
+    查询指定目录的占用情况 du -h dir
+                      -s 占用大小汇总
+                      -h 带计量单位
+                      -a 含文件
+                      --max-depth=n 子目录深度级别 
+                      -c 列出明细的同时，增加汇总  
+                       du -ach --max-depth=1 /opt
+    统计信息wc 
+      统计目录包含子目录个数 ls -lhaR /home | grep "^d" | wc -l
+      统计文件子文件个数 ls -lhaR /home | grep "^-" | wc -l
+    yum 安装指令  
+### 服务 ls -lha /etc/init.d
+    which service /usr/sbin/service
